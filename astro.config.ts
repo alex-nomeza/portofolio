@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   site: 'https://alex-nomeza.github.io',
-  base: '/alex-portfolio',
+  base: '/portofolio',
   trailingSlash: 'always',
   output: 'static',
   integrations: [react()],
