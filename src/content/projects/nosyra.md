@@ -1,7 +1,7 @@
 ---
 title: 'Nosyra'
-subtitle: 'Un espace de travail dédié à la recherche, aux informations structurées et aux décisions.'
-summary: 'Un concept d’interface SaaS pour rechercher, comparer et organiser des informations dans un même espace.'
+subtitle: 'Un concept d’outil pour rechercher, comparer et classer des informations.'
+summary: 'Une interface de travail qui rassemble la recherche, la comparaison et le suivi des informations au même endroit.'
 year: 2026
 order: 40
 status: 'published'
@@ -18,13 +18,13 @@ cover: '../../assets/images/projects/nosyra-generated.png'
 coverAlt: 'Plans d’une interface sombre avec des parcours structurés et de discrets accents ambrés.'
 seo:
   title: 'Nosyra — Design de produit et d’interface'
-  description: 'Un concept d’interface SaaS pour rechercher, comparer et organiser des informations dans un même espace. Par Alex Rafanomezantsoa.'
+  description: 'Un concept d’outil pour rechercher, comparer, classer et suivre des informations au même endroit. Par Alex Rafanomezantsoa.'
 ---
 
-## Organiser la recherche
+## Le projet
 
-Nosyra est un concept de produit SaaS pour collecter, organiser et examiner des informations structurées. Il réunit la recherche, les résultats et les décisions dans un même espace de travail.
+Nosyra est un concept d’outil de travail pour collecter, classer et vérifier des informations. Il regroupe les recherches, les résultats enregistrés et les décisions prises dans une seule interface.
 
-## Des actions et des repères
+## Les principales actions
 
-L’expérience repose sur quelques actions récurrentes : rechercher, examiner, comparer, enregistrer et suivre l’avancement. Une navigation persistante facilite le repérage, tandis que des panneaux contextuels gardent les informations secondaires à proximité sans interrompre la tâche principale.
+L’utilisateur peut rechercher une information, examiner un résultat, le comparer avec un autre, l’enregistrer et suivre son traitement. Le menu reste visible pour faciliter les déplacements. Des panneaux secondaires donnent les détails utiles sans quitter la tâche en cours.

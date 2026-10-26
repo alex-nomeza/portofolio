@@ -9,21 +9,25 @@
 @theme inline {
   --color-background: var(--color-bg);
   --color-foreground: var(--color-text);
+  --color-card: var(--color-surface);
+  --color-card-foreground: var(--color-text);
+  --color-popover: var(--color-surface);
+  --color-popover-foreground: var(--color-text);
   --color-primary: var(--color-text);
-  --color-primary-foreground: var(--color-bg);
-  --color-secondary: var(--color-border);
+  --color-primary-foreground: var(--color-inverse-text);
+  --color-secondary: var(--color-surface-hover);
   --color-secondary-foreground: var(--color-text);
-  --color-muted: var(--color-border);
+  --color-muted: var(--color-surface-hover);
   --color-muted-foreground: var(--color-text-muted);
-  --color-accent: var(--color-border);
+  --color-accent: var(--color-surface-hover);
   --color-accent-foreground: var(--color-text);
-  --color-ring: var(--color-text);
+  --color-ring: var(--color-border-strong);
   --color-input: var(--color-border);
   --color-border: var(--border);
-  --radius-sm: 0;
-  --radius-md: 0;
-  --radius-lg: 0;
-  --radius-xl: 0;
+  --radius-sm: var(--radius-ui-sm);
+  --radius-md: var(--radius-ui-md);
+  --radius-lg: var(--radius-ui-lg);
+  --radius-xl: var(--radius-ui-lg);
 }
 
 @layer base {
@@ -41,14 +45,16 @@
     text-size-adjust: 100%;
     scroll-behavior: smooth;
     scroll-padding-top: var(--header-height);
+    text-rendering: optimizeLegibility;
   }
 
   body {
     display: flex;
     flex-direction: column;
     min-width: 20rem;
-    min-height: 100vh;
+    min-height: 100dvh;
     margin: 0;
+    overflow-x: hidden;
     background: var(--color-bg);
     font-size: var(--font-size-body);
   }
@@ -90,6 +96,14 @@
     text-underline-offset: 0.2em;
   }
 
+  a,
+  button {
+    transition:
+      color var(--duration-fast) var(--ease-out),
+      background-color var(--duration-fast) var(--ease-out),
+      border-color var(--duration-fast) var(--ease-out);
+  }
+
   a:not([class]):hover {
     text-decoration-thickness: 2px;
   }
@@ -127,8 +141,8 @@
   }
 
   ::selection {
-    background: var(--color-inverse-bg);
-    color: var(--color-inverse-text);
+    background: var(--color-text);
+    color: var(--color-bg);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -147,6 +161,7 @@
     scroll-margin-top: var(--space-6);
   }
   img {
+    display: block;
     max-width: 100%;
   }
 }

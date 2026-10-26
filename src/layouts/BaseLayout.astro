@@ -1,18 +1,26 @@
 ---
 import Footer from '../components/global/Footer.astro';
-import Header from '../components/global/Header.astro';
 import '../styles/global.css';
 import interFont from '../assets/fonts/inter-latin.woff2?url';
-import titleFont from '../assets/fonts/bricolage-grotesque-latin.woff2?url';
 import logoFont from '../assets/fonts/google-sans-latin.woff2?url';
 
 interface Props {
   title: string;
   description: string;
   noindex?: boolean;
+  chrome?: boolean;
+  footer?: boolean;
+  pageClass?: string;
 }
 
-const { title, description, noindex = false } = Astro.props;
+const {
+  title,
+  description,
+  noindex = false,
+  chrome = true,
+  footer = chrome,
+  pageClass,
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -22,20 +30,23 @@ const { title, description, noindex = false } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
+    <meta name="theme-color" content="#f1eee6" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={new URL(Astro.url.pathname, Astro.site)} />
     <link rel="preload" href={interFont} as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href={titleFont} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={logoFont} as="font" type="font/woff2" crossorigin />
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
     <title>{title}</title>
   </head>
-  <body>
+  <body class={pageClass}>
     <a class="skip-link" href="#main-content">Aller au contenu</a>
-    <Header pathname={Astro.url.pathname} />
     <main id="main-content">
       <slot />
     </main>
-    <Footer />
+    {footer && <Footer />}
   </body>
 </html>

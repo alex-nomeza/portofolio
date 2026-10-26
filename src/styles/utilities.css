@@ -7,8 +7,7 @@
 .page-intro {
   display: grid;
   gap: var(--space-5);
-  align-content: center;
-  padding-block: var(--space-8);
+  padding-block: var(--space-7);
 }
 
 .eyebrow {
@@ -26,27 +25,6 @@
   max-width: 38ch;
   margin: 0;
   font-size: var(--font-size-body-lg);
-}
-
-@media (min-width: 56rem) {
-  .page-intro {
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-    column-gap: var(--page-gutter);
-  }
-
-  .page-intro .eyebrow {
-    grid-column: 1 / 4;
-    align-self: start;
-  }
-
-  .page-intro h1 {
-    grid-column: 1 / 9;
-  }
-
-  .page-intro .lede {
-    grid-column: 1 / 9;
-    align-self: end;
-  }
 }
 
 .prose {
@@ -80,7 +58,7 @@
   justify-content: space-between;
   gap: var(--space-4) var(--space-6);
   padding-bottom: var(--space-6);
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border-strong);
 }
 
 .section-head h2 {
@@ -101,7 +79,6 @@
 }
 .editorial-stack > * + * {
   padding-top: var(--space-7);
-  border-top: 1px solid var(--color-border);
 }
 .editorial-section {
   display: grid;
@@ -122,7 +99,7 @@
   gap: var(--space-3) var(--space-5);
 }
 .editorial-page {
-  padding-block: var(--section-space);
+  padding-block: clamp(var(--space-7), 7vw, var(--space-9));
 }
 .editorial-heading {
   display: grid;
@@ -155,6 +132,13 @@
   color: var(--color-text-muted);
   line-height: 1.75;
 }
+.editorial-reading a {
+  text-decoration-thickness: 1px;
+}
+.editorial-reading strong {
+  color: var(--color-text);
+  font-weight: var(--font-weight-medium);
+}
 .editorial-reading :is(ul, ol) {
   padding-left: var(--space-5);
   color: var(--color-text-muted);
@@ -162,9 +146,4 @@
 }
 .editorial-reading li + li {
   margin-top: var(--space-2);
-}
-@media (min-width: 56rem) {
-  .editorial-grid {
-    grid-template-columns: var(--editorial-left) var(--editorial-right);
-  }
 }

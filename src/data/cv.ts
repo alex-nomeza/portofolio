@@ -5,6 +5,7 @@ export interface TimelineEntry {
   location?: string;
   description?: string;
   highlights?: string[];
+  portfolioRelevant?: boolean;
   draft?: boolean;
 }
 
@@ -16,6 +17,7 @@ export const experiences: TimelineEntry[] = [
     title: 'Responsable de service',
     organization: 'CYBERPRO',
     location: 'Antsahamamy, Antananarivo',
+    portfolioRelevant: true,
     highlights: [
       'Maintenance du matériel informatique.',
       'Graphisme et mise en page.',
@@ -45,6 +47,7 @@ export const experiences: TimelineEntry[] = [
     period: 'Mars 2015',
     title: 'Projet de gestion des logements universitaires',
     organization: 'Université de Fianarantsoa',
+    portfolioRelevant: true,
     description: 'Réalisation du projet « Gestion des logements de l’Université de Fianarantsoa ».',
   },
   {
@@ -101,19 +104,31 @@ export const education: TimelineEntry[] = [
 ];
 
 export const skills = [
-  { title: 'Bureautique', items: ['Word', 'Excel', 'PowerPoint'] },
-  { title: 'Création graphique', items: ['Photoshop', 'Illustrator', 'InDesign'] },
-  { title: 'Vidéo & audio', items: ['Vegas', 'Audition', 'After Effects'] },
-  { title: 'Web', items: ['HTML5', 'CSS3'] },
-  { title: 'Informatique', items: ['Utilisation, maintenance et installation d’ordinateurs'] },
   {
-    title: 'Qualités professionnelles',
-    items: [
-      'Motivation & dynamisme',
-      'Esprit d’initiative',
-      'Sens des responsabilités',
-      'Sens du relationnel',
-    ],
+    title: 'Direction artistique',
+    description: 'Définir l’apparence d’un projet et garder la même cohérence sur chaque support.',
+    items: ['Identité visuelle', 'Systèmes de marque', 'Déclinaisons web'],
+  },
+  {
+    title: 'Édition & composition',
+    description: 'Organiser les textes et les images pour rendre un document facile à lire.',
+    items: ['Typographie', 'Grille', 'Mise en page'],
+  },
+  {
+    title: 'Web & interfaces',
+    description: 'Concevoir et réaliser des pages web lisibles sur ordinateur, tablette et mobile.',
+    items: ['Conception d’interface', 'Responsive design', 'HTML5', 'CSS3'],
+  },
+  {
+    title: 'Création graphique',
+    description: 'Créer les images et les fichiers nécessaires à la production d’un projet.',
+    items: ['Photoshop', 'Illustrator', 'InDesign'],
+  },
+  {
+    title: 'Image & mouvement',
+    description:
+      'Créer et modifier des images, du son, des animations et des volumes en 2D ou en 3D.',
+    items: ['After Effects', 'Vegas', 'Audition', '2D', '3D'],
   },
 ];
 

@@ -1,34 +1,87 @@
 ---
-const currentYear = new Date().getFullYear();
+import { profile } from '../../data/profile';
 ---
 
-<footer class="site-footer">
-  <p>Alex Rafanomezantsoa</p>
-  <p>{currentYear} · Nosy Be, Madagascar</p>
+<footer id="contact" class="site-footer">
+  <div class="footer-primary">
+    <div class="footer-intro">
+      <p class="eyebrow">Contact</p>
+      <p>Disponible pour des projets graphiques et web.</p>
+    </div>
+    <address>
+      <a class="footer-email" href={`mailto:${profile.email}`}>{profile.email}</a>
+    </address>
+  </div>
 </footer>
 
 <style>
   .site-footer {
     width: min(100%, var(--content-max));
     margin-inline: auto;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
     gap: var(--space-6);
-    padding: var(--space-6) var(--page-gutter);
+    margin-top: var(--section-space);
+    padding: var(--space-6) var(--page-gutter) var(--space-5);
     border-top: 1px solid var(--color-border);
-    color: var(--color-text-muted);
-    font-family: var(--font-meta);
-    font-size: var(--font-size-meta);
+  }
+
+  :global(body.home-page) .site-footer {
+    margin-top: var(--space-4);
   }
 
   .site-footer p {
     margin: 0;
   }
 
-  @media (max-width: 36rem) {
-    .site-footer {
-      flex-direction: column;
-      gap: var(--space-3);
+  .footer-primary {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    gap: var(--space-5);
+  }
+
+  .footer-intro {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .footer-intro > p:last-child {
+    font-family: var(--font-display);
+    font-size: var(--font-size-body-lg);
+    font-weight: var(--font-weight-medium);
+  }
+
+  address {
+    font-style: normal;
+  }
+
+  .footer-email {
+    display: inline-flex;
+    min-height: var(--control-height);
+    align-items: center;
+    padding-inline: var(--space-3);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-ui-md);
+    background: var(--color-surface);
+    font-size: var(--font-size-control);
+    font-weight: var(--font-weight-medium);
+    text-decoration: none;
+  }
+
+  .footer-email:is(:hover, :focus-visible) {
+    border-color: var(--color-border-strong);
+    background: var(--color-surface-hover);
+  }
+
+  @media (max-width: 40rem) {
+    .footer-primary {
+      grid-template-columns: 1fr;
+      align-items: start;
+    }
+
+    .footer-email {
+      max-width: 100%;
+      overflow-wrap: anywhere;
     }
   }
 </style>

@@ -2,15 +2,65 @@ import { Button } from '../ui/button';
 
 interface Props {
   githubUrl: string;
+  email: string;
   linkedinUrl?: string;
 }
 
 // Static brand icons: no hydration or icon-library dependency needed.
-export function SocialLinks({ githubUrl, linkedinUrl }: Props) {
+export function SocialLinks({ githubUrl, email, linkedinUrl }: Props) {
+  const hasLinkedIn = Boolean(linkedinUrl && linkedinUrl !== '#');
+
   return (
-    <div className="flex items-center gap-1">
+    <nav className="flex items-center gap-1" aria-label="Contact et réseaux sociaux">
+      {hasLinkedIn ? (
+        <Button asChild variant="ghost" size="icon">
+          <a
+            href={linkedinUrl}
+            aria-label="LinkedIn"
+            title="LinkedIn"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <LinkedInIcon />
+          </a>
+        </Button>
+      ) : (
+        <Button
+          variant="ghost"
+          size="icon"
+          aria-label="LinkedIn — lien bientôt disponible"
+          title="LinkedIn — bientôt disponible"
+          disabled
+        >
+          <LinkedInIcon />
+        </Button>
+      )}
       <Button asChild variant="ghost" size="icon">
-        <a href={githubUrl} aria-label="GitHub" title="GitHub">
+        <a href={`mailto:${email}`} aria-label="Envoyer un email" title="Email">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+            focusable="false"
+            data-icon="inline-start"
+          >
+            <rect x="3" y="5" width="18" height="14" rx="2" />
+            <path d="m3 7 9 6 9-6" />
+          </svg>
+        </a>
+      </Button>
+      <Button asChild variant="ghost" size="icon">
+        <a
+          href={githubUrl}
+          aria-label="GitHub"
+          title="GitHub"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <svg
             viewBox="0 0 24 24"
             fill="currentColor"
@@ -22,21 +72,20 @@ export function SocialLinks({ githubUrl, linkedinUrl }: Props) {
           </svg>
         </a>
       </Button>
-      {linkedinUrl && (
-        <Button asChild variant="ghost" size="icon">
-          <a href={linkedinUrl} aria-label="LinkedIn" title="LinkedIn">
-            <svg
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              aria-hidden="true"
-              focusable="false"
-              data-icon="inline-start"
-            >
-              <path d="M20.45 2H3.55C2.69 2 2 2.68 2 3.52v16.96C2 21.32 2.69 22 3.55 22h16.9c.86 0 1.55-.68 1.55-1.52V3.52C22 2.68 21.31 2 20.45 2ZM7.93 18.75H4.98V9.2h2.95v9.55ZM6.46 7.89a1.71 1.71 0 1 1 0-3.42 1.71 1.71 0 0 1 0 3.42Zm12.29 10.86H15.8V14.1c0-1.11-.02-2.54-1.55-2.54-1.55 0-1.79 1.21-1.79 2.46v4.73H9.51V9.2h2.83v1.3h.04c.39-.74 1.36-1.52 2.79-1.52 2.98 0 3.58 1.96 3.58 4.51v5.26Z" />
-            </svg>
-          </a>
-        </Button>
-      )}
-    </div>
+    </nav>
+  );
+}
+
+function LinkedInIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+      focusable="false"
+      data-icon="inline-start"
+    >
+      <path d="M20.45 2H3.55C2.69 2 2 2.68 2 3.52v16.96C2 21.32 2.69 22 3.55 22h16.9c.86 0 1.55-.68 1.55-1.52V3.52C22 2.68 21.31 2 20.45 2ZM7.93 18.75H4.98V9.2h2.95v9.55ZM6.46 7.89a1.71 1.71 0 1 1 0-3.42 1.71 1.71 0 0 1 0 3.42Zm12.29 10.86H15.8V14.1c0-1.11-.02-2.54-1.55-2.54-1.55 0-1.79 1.21-1.79 2.46v4.73H9.51V9.2h2.83v1.3h.04c.39-.74 1.36-1.52 2.79-1.52 2.98 0 3.58 1.96 3.58 4.51v5.26Z" />
+    </svg>
   );
 }

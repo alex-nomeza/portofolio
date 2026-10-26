@@ -22,7 +22,7 @@ const TimelineItem = React.forwardRef<HTMLLIElement, React.ComponentPropsWithout
       ref={ref}
       data-slot="timeline-item"
       className={cn(
-        'group/timeline relative grid grid-cols-[var(--space-4)_minmax(0,1fr)] gap-x-[var(--space-4)] pb-[var(--space-7)] last:pb-0',
+        'group/timeline relative grid grid-cols-[var(--space-4)_minmax(0,1fr)] gap-x-[var(--space-5)] pb-[var(--space-8)] last:pb-0',
         className,
       )}
       {...props}
@@ -38,7 +38,7 @@ const TimelineConnector = React.forwardRef<HTMLDivElement, React.ComponentPropsW
       aria-hidden="true"
       data-slot="timeline-connector"
       className={cn(
-        'absolute inset-y-0 left-[calc(var(--space-4)/2)] w-px bg-border group-last/timeline:hidden',
+        'absolute inset-y-0 left-[calc(var(--space-4)/2)] w-px bg-[var(--color-border-strong)] group-last/timeline:hidden',
         className,
       )}
       {...props}
@@ -47,12 +47,15 @@ const TimelineConnector = React.forwardRef<HTMLDivElement, React.ComponentPropsW
 );
 TimelineConnector.displayName = 'TimelineConnector';
 
-function TimelineIcon() {
+function TimelineIcon({ className }: { className?: string }) {
   return (
     <span
       aria-hidden="true"
       data-slot="timeline-icon"
-      className="relative col-start-1 row-start-1 mx-auto mt-[var(--space-2)] size-[var(--space-2)] rounded-full bg-primary ring-4 ring-background"
+      className={cn(
+        'relative col-start-1 row-start-1 mx-auto mt-[var(--space-2)] size-[var(--space-2)] rounded-full bg-primary ring-4 ring-background',
+        className,
+      )}
     />
   );
 }

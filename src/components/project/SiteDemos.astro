@@ -1,31 +1,88 @@
 ---
+import { Image } from 'astro:assets';
 import { siteDemos } from '../../data/site-demos';
 import { LinkButton } from '../ui/link-button';
 import { withBase } from '../../utils/paths';
+import restaurantImage from '../../assets/images/site-demos/pexels/restaurant.jpg';
+import boutiqueImage from '../../assets/images/site-demos/pexels/boutique.jpg';
+import agenceImage from '../../assets/images/site-demos/pexels/agence.jpg';
+import hotelImage from '../../assets/images/site-demos/pexels/hotel.jpg';
+import voyageImage from '../../assets/images/site-demos/pexels/voyage.jpg';
+import toursImage from '../../assets/images/site-demos/pexels/tours.jpg';
+
+interface Props {
+  layout?: 'list' | 'bento';
+}
+
+const { layout = 'list' } = Astro.props;
+
+const demoImages = {
+  restaurant: {
+    src: restaurantImage,
+    alt: 'Salle de restaurant contemporaine éclairée par des suspensions rondes.',
+  },
+  boutique: {
+    src: boutiqueImage,
+    alt: 'Intérieur clair d’une boutique de vêtements et d’accessoires.',
+  },
+  agence: {
+    src: agenceImage,
+    alt: 'Poste de création numérique avec écrans, clavier et outils de montage.',
+  },
+  hotel: {
+    src: hotelImage,
+    alt: 'Chambre d’hôtel lumineuse décorée de grandes feuilles tropicales.',
+  },
+  voyage: {
+    src: voyageImage,
+    alt: 'Vue aérienne d’une île tropicale bordée de palmiers et d’eau turquoise.',
+  },
+  tours: {
+    src: toursImage,
+    alt: 'Groupe de randonneurs avançant sur un sentier de montagne.',
+  },
+};
 ---
 
-<section class="site-demos" aria-labelledby="site-demos-title">
+<section
+  class:list={['site-demos', { 'site-demos--bento': layout === 'bento' }]}
+  aria-labelledby="site-demos-title"
+>
   <p class="eyebrow">HTML · CSS · JavaScript</p>
-  <h2 id="site-demos-title">Des sites à explorer.</h2>
+  <h2 id="site-demos-title">Six exemples de sites interactifs.</h2>
   <p class="intro">
-    {siteDemos.length} démonstrations interactives. Les enseignes, produits et données sont fictifs.
+    Chaque exemple présente un type de site et des fonctions différentes. Les marques, produits,
+    prix et autres données sont fictifs.
   </p>
   <ul>
     {
       siteDemos.map((demo) => (
         <li>
-          <p class="eyebrow">{demo.category}</p>
-          <h3>{demo.name}</h3>
-          <p>{demo.description}</p>
-          <LinkButton
-            href={withBase(`sites/${demo.id}/index.html`)}
-            target="_blank"
-            rel="noopener noreferrer"
-            direction="external"
-            aria-label={`Visiter le site ${demo.name} (nouvel onglet)`}
-          >
-            Visiter le site
-          </LinkButton>
+          {layout === 'bento' && (
+            <Image
+              class="demo-image"
+              src={demoImages[demo.id].src}
+              alt={demoImages[demo.id].alt}
+              widths={[480, 720, 960]}
+              sizes="(max-width: 48rem) 100vw, 60vw"
+              loading="lazy"
+            />
+          )}
+          <div class="demo-content">
+            <p class="eyebrow">{demo.category}</p>
+            <h3>{demo.name}</h3>
+            <p>{demo.description}</p>
+            <LinkButton
+              variant="outline"
+              href={withBase(`sites/${demo.id}/index.html`)}
+              target="_blank"
+              rel="noopener noreferrer"
+              direction="external"
+              aria-label={`Visiter le site ${demo.name} (nouvel onglet)`}
+            >
+              Ouvrir la démonstration
+            </LinkButton>
+          </div>
         </li>
       ))
     }
@@ -45,20 +102,107 @@ import { withBase } from '../../utils/paths';
     max-width: var(--text-max);
   }
   ul {
+    display: grid;
+    gap: var(--space-3);
     padding: 0;
     list-style: none;
     margin: var(--space-6) 0 0;
   }
   li {
-    border-top: 1px solid var(--color-border);
-    padding-block: var(--space-6);
+    padding: var(--space-5);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-ui-lg);
+    background: var(--color-surface);
   }
   h3 {
     font-size: var(--font-size-body-lg);
     margin-top: var(--space-3);
   }
-  li > p:not(.eyebrow) {
+
+  .demo-content > p:not(.eyebrow) {
     color: var(--color-text-muted);
     max-width: 55ch;
+  }
+
+  .site-demos--bento ul {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: var(--space-2);
+    padding: 0;
+  }
+
+  .site-demos--bento li {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    min-height: 20rem;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-ui-lg);
+    background: var(--color-surface);
+  }
+
+  .site-demos--bento :global(.demo-image) {
+    width: 100%;
+    height: clamp(8rem, 12vw, 11rem);
+    object-fit: cover;
+  }
+
+  .site-demos--bento .demo-content {
+    display: grid;
+    align-content: start;
+    padding: var(--space-4);
+    transition: background-color var(--duration-fast) var(--ease-out);
+  }
+
+  .site-demos--bento li:hover .demo-content {
+    background: var(--color-surface-hover);
+  }
+
+  .site-demos--bento li:nth-child(1) {
+    grid-column: span 5;
+  }
+
+  .site-demos--bento li:nth-child(2) {
+    grid-column: span 4;
+  }
+
+  .site-demos--bento li:nth-child(3) {
+    grid-column: span 3;
+  }
+
+  .site-demos--bento li:nth-child(4) {
+    grid-column: span 3;
+  }
+
+  .site-demos--bento li:nth-child(5),
+  .site-demos--bento li:nth-child(6) {
+    grid-column: span 5;
+  }
+
+  .site-demos--bento li:nth-child(6) {
+    grid-column: span 4;
+  }
+
+  .site-demos--bento .demo-content :global(a) {
+    margin-top: auto;
+  }
+
+  @media (max-width: 48rem) {
+    .site-demos--bento ul {
+      grid-template-columns: 1fr;
+      gap: var(--space-2);
+      padding: 0;
+    }
+
+    .site-demos--bento li:nth-child(n) {
+      grid-column: 1;
+      min-height: 0;
+    }
+
+    .site-demos--bento :global(.demo-image) {
+      height: auto;
+      aspect-ratio: 16 / 10;
+    }
   }
 </style>

@@ -9,19 +9,42 @@ import { LinkButton } from '../components/ui/link-button';
   description="La page demandée est introuvable."
   noindex
 >
-  <div class="container editorial-page editorial-grid">
+  <div class="container editorial-page not-found">
     <header class="editorial-heading">
       <p class="eyebrow">Erreur 404</p><h1>Cette page<br />n’existe pas.</h1>
     </header>
-    <div class="editorial-heading">
+    <div class="not-found-content">
       <p>
-        Le lien a peut-être changé ou la page a été retirée. Vous pouvez retrouver les projets ou
-        revenir à l’accueil.
+        Le lien a peut-être changé ou la page a été retirée. Vous pouvez retrouver les réalisations
+        ou revenir à l’accueil.
       </p>
       <div class="page-actions">
-        <LinkButton href={withBase('work/')} variant="outline">Voir les projets</LinkButton>
+        <LinkButton href={withBase('#projets')} variant="default">Voir les réalisations</LinkButton>
         <LinkButton href={withBase()} direction="left">Retour à l’accueil</LinkButton>
       </div>
     </div>
   </div>
 </BaseLayout>
+
+<style>
+  .not-found {
+    display: grid;
+    width: min(100%, 42rem);
+    gap: var(--space-6);
+  }
+
+  .not-found-content {
+    display: grid;
+    gap: var(--space-5);
+    padding: var(--space-5);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-ui-lg);
+    background: var(--color-surface);
+  }
+
+  .not-found-content p {
+    max-width: 42ch;
+    margin: 0;
+    color: var(--color-text-muted);
+  }
+</style>

@@ -12,9 +12,23 @@ export function LinkButton({ children, variant = 'link', direction = 'right', ..
   return (
     <Button asChild variant={variant} size={variant === 'link' ? 'text' : 'default'}>
       <a {...props}>
-        {direction === 'left' && <span aria-hidden="true">{arrow}</span>}
+        {direction === 'left' && (
+          <span
+            className="transition-transform duration-[var(--duration-fast)] group-hover:-translate-x-0.5"
+            aria-hidden="true"
+          >
+            {arrow}
+          </span>
+        )}
         {children}
-        {direction !== 'left' && <span aria-hidden="true">{arrow}</span>}
+        {direction !== 'left' && (
+          <span
+            className="transition-transform duration-[var(--duration-fast)] group-hover:translate-x-0.5"
+            aria-hidden="true"
+          >
+            {arrow}
+          </span>
+        )}
       </a>
     </Button>
   );

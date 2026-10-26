@@ -1,5 +1,5 @@
 export const profile = {
   email: 'alexx.rafanomezantsoa@gmail.com',
   githubUrl: 'https://github.com/alex-nomeza',
-  linkedinUrl: '#', // Temporary destination requested by the owner.
+  linkedinUrl: 'https://www.linkedin.com/in/alexandre-rafanomezantsoa-75378215a/',
 };

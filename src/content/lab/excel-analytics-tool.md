@@ -1,6 +1,6 @@
 ---
-title: 'Outil d’analyse Excel'
-summary: 'Un prototype pour distinguer données sources, hypothèses et résultats dans le parcours d’analyse d’un tableur.'
+title: 'Prototype d’analyse Excel'
+summary: 'Un prototype qui sépare clairement les données d’origine, les hypothèses, les calculs et les résultats d’un tableur.'
 year: 2026
 status: 'prototype'
 draft: false
@@ -12,18 +12,18 @@ tags:
 featured: true
 ---
 
-## Clarifier le parcours d’analyse
+## L’objectif
 
-Ce prototype organise les données brutes d’un tableur dans un parcours d’analyse plus compréhensible. Il explore la manière de structurer des outils familiers, de clarifier leur hiérarchie et d’améliorer les retours à l’utilisateur.
+Ce prototype cherche à rendre un classeur d’analyse plus simple à comprendre. Il organise les données, les réglages, les calculs et les résultats dans des parties clairement identifiées.
 
-## Des informations difficiles à distinguer
+## Le problème
 
-Les classeurs volumineux mélangent souvent données sources, calculs, contrôles et rapports dans un même espace visuel. Les erreurs deviennent difficiles à repérer et l’utilisateur doit mémoriser des relations que l’interface devrait rendre visibles.
+Dans un classeur volumineux, les données d’origine, les formules, les contrôles et les rapports sont souvent mélangés. Il devient alors difficile de repérer une erreur ou de comprendre d’où vient un résultat.
 
-## Approche produit
+## La solution étudiée
 
-Le concept sépare la préparation des données, les hypothèses, l’analyse et la présentation. Des contrôles réutilisables facilitent la comparaison des scénarios ; des noms cohérents, la validation et des indications d’état renforcent la confiance dans les résultats.
+Le prototype sépare la préparation des données, les hypothèses, l’analyse et la présentation finale. Des contrôles communs facilitent la comparaison de plusieurs scénarios. Des noms cohérents, des validations et des messages d’état aident à vérifier les résultats.
 
-## Direction
+## Un fonctionnement familier
 
-L’interface conserve les habitudes du tableur tout en appliquant les principes de conception produit à la navigation, à la hiérarchie et à la prévention des erreurs. Des choix de structure modestes permettent de rendre le classeur plus facile à utiliser.
+L’interface conserve les habitudes d’un tableur afin de rester facile à prendre en main. Les changements portent surtout sur l’organisation, la navigation et la prévention des erreurs.

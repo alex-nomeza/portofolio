@@ -11,7 +11,7 @@ export type Project = CollectionEntry<'projects'>;
 export function compareProjects(a: Project, b: Project): number {
   return (
     a.data.order - b.data.order ||
-    b.data.year - a.data.year ||
+    (b.data.year ?? Number.NEGATIVE_INFINITY) - (a.data.year ?? Number.NEGATIVE_INFINITY) ||
     a.data.title.localeCompare(b.data.title)
   );
 }
@@ -37,4 +37,12 @@ export function getNextProject(projects: Project[], currentId: string): Project 
   const index = projects.findIndex((project) => project.id === currentId);
   if (index === -1) return undefined;
   return projects[(index + 1) % projects.length];
+}
+
+/** Previous project in the published sequence, wrapping after the first entry. */
+export function getPreviousProject(projects: Project[], currentId: string): Project | undefined {
+  if (projects.length < 2) return undefined;
+  const index = projects.findIndex((project) => project.id === currentId);
+  if (index === -1) return undefined;
+  return projects[(index - 1 + projects.length) % projects.length];
 }

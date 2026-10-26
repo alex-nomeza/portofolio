@@ -1,7 +1,7 @@
 ---
 title: 'Le Zahir'
-subtitle: 'Une identité hôtelière inspirée du lieu, des matières et de l’atmosphère.'
-summary: 'Un concept de marque hôtelière à Nosy Be, entre identité visuelle, matières naturelles et design web.'
+subtitle: 'Un concept d’identité visuelle et de site web pour un hôtel à Nosy Be.'
+summary: 'Une identité d’hôtel inspirée des paysages et des matières naturelles de Nosy Be, déclinée sur le web.'
 year: 2026
 order: 20
 status: 'published'
@@ -18,13 +18,13 @@ cover: '../../assets/images/projects/le-zahir-generated.png'
 coverAlt: 'Intérieur tropical ouvert, encadré de bois sombre, de pierre naturelle et de palmiers face à l’océan.'
 seo:
   title: 'Le Zahir — Identité hôtelière et design web'
-  description: 'Un concept de marque hôtelière à Nosy Be, entre identité visuelle, matières naturelles et design web. Par Alex Rafanomezantsoa.'
+  description: 'Un concept d’identité visuelle et de site web pour un hôtel à Nosy Be. Par Alex Rafanomezantsoa.'
 ---
 
-## Une identité ancrée dans le lieu
+## Le projet
 
-Le Zahir est un concept de marque hôtelière imaginé pour Nosy Be. Son identité associe le caractère du lieu, la texture des matières naturelles et la clarté attendue d’une expérience d’accueil contemporaine.
+Le Zahir est un concept de marque et de site web pour un hôtel à Nosy Be. Le projet cherche à évoquer le lieu tout en donnant aux visiteurs des informations simples et faciles à consulter.
 
-## Matières, images et couleurs
+## L’univers visuel
 
-Le système utilise des cadrages affirmés, une typographie discrète et une palette inspirée du bois sombre, de la pierre claire, du sable, du feuillage et de la lumière de l’océan. La photographie privilégie les passages, les matières et l’atmosphère pour une expression de l’hospitalité ancrée dans le lieu.
+Les couleurs viennent du bois sombre, de la pierre claire, du sable, des plantes et de l’océan. La typographie reste discrète pour laisser de la place aux photographies. Les images montrent les espaces, les matières et la lumière afin de présenter l’ambiance de l’hôtel.

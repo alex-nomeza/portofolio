@@ -1,26 +1,13 @@
 ---
-import { render } from 'astro:content';
-import ProjectLayout from '../../layouts/ProjectLayout.astro';
-import { getPublishedProjects, getNextProject, type Project } from '../../utils/projects';
+import { getPublishedProjects } from '../../utils/projects';
 
 export async function getStaticPaths() {
   const projects = await getPublishedProjects();
 
   return projects.map((project) => ({
     params: { slug: project.id },
-    props: { project, next: getNextProject(projects, project.id) },
   }));
 }
 
-interface Props {
-  project: Project;
-  next?: Project;
-}
-
-const { project, next } = Astro.props;
-const { Content } = await render(project);
+return Astro.redirect(Astro.url.pathname.replace('/work/', '/projets/'), 301);
 ---
-
-<ProjectLayout project={project} next={next}>
-  <Content />
-</ProjectLayout>

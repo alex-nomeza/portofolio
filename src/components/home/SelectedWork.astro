@@ -1,28 +1,89 @@
 ---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import { getPublishedProjects, getFeaturedProjects } from '../../utils/projects';
 import { withBase } from '../../utils/paths';
+import journalImage from '../../assets/images/projects/pexels/le-journal.jpg';
+import zahirImage from '../../assets/images/projects/pexels/le-zahir.jpg';
+import webImage from '../../assets/images/projects/pexels/web-digital-selection.jpg';
+import nosyraImage from '../../assets/images/projects/pexels/nosyra.jpg';
+import architectureImage from '../../assets/images/projects/pexels/3d-architecture.jpg';
 import { CollectionEmpty } from '../blocks/collection-empty';
 
 const featured = await getFeaturedProjects();
 const selected = (featured.length > 0 ? featured : await getPublishedProjects()).slice(0, 5);
+
+// Temporary Pexels photography: replace with final project artwork when available.
+const placeholderByProject: Record<string, { src: ImageMetadata; alt: string }> = {
+  'le-journal': {
+    src: journalImage,
+    alt: 'Magazine ouvert sur une table, photographie temporaire pour Le Journal.',
+  },
+  'le-zahir': {
+    src: zahirImage,
+    alt: 'Resort tropical entouré de palmiers, photographie temporaire pour Le Zahir.',
+  },
+  'web-digital-selection': {
+    src: webImage,
+    alt: 'Ordinateur portable sur un bureau minimal, photographie temporaire pour Web et numérique.',
+  },
+  nosyra: {
+    src: nosyraImage,
+    alt: 'Graphique de données affiché sur un ordinateur, photographie temporaire pour Nosyra.',
+  },
+  '3d-architecture': {
+    src: architectureImage,
+    alt: 'Structure architecturale en béton aux lignes géométriques, photographie temporaire pour 3D et architecture.',
+  },
+};
 ---
 
 <section id="selected-work" class="selected-projects" aria-labelledby="selected-work-title">
-  <h2 id="selected-work-title">Quelques projets</h2>
+  <header class="section-header">
+    <h2 id="selected-work-title">Réalisations</h2>
+    <a href={withBase('projets/')}>Toutes les réalisations <span aria-hidden="true">↗</span></a>
+  </header>
   {
     selected.length === 0 ? (
       <CollectionEmpty
-        title="Projets à venir"
-        description="Les projets sélectionnés sont en cours de préparation."
+        title="Réalisations à venir"
+        description="Les réalisations sont en cours de préparation."
       />
     ) : (
-      <ul class="project-list">
-        {selected.map((project) => (
-          <li>
-            <a href={withBase(`work/${project.id}/`)}>{project.data.title}</a>
-            <p>{project.data.summary}</p>
-          </li>
-        ))}
+      <ul class="project-grid">
+        {selected.map((project) => {
+          const placeholder = placeholderByProject[project.id];
+          const image = placeholder?.src ?? project.data.cover;
+          const alt = placeholder?.alt ?? project.data.coverAlt;
+
+          return (
+            <li>
+              <a class="project-card" href={withBase(`projets/${project.id}/`)}>
+                <span class="project-image">
+                  <Image
+                    src={image}
+                    alt={alt}
+                    widths={[480, 768, 1080, 1440]}
+                    sizes="(max-width: 40rem) 100vw, (max-width: 64rem) 50vw, 33vw"
+                    loading="lazy"
+                  />
+                </span>
+                <span class="project-details">
+                  <span class="project-heading">
+                    <span class="project-title">{project.data.title}</span>
+                    <span class="project-arrow" aria-hidden="true">
+                      ↗
+                    </span>
+                  </span>
+                  <span class="project-meta">
+                    {project.data.disciplines[0]}
+                    {project.data.year && ` · ${project.data.year}`}
+                  </span>
+                </span>
+              </a>
+            </li>
+          );
+        })}
       </ul>
     )
   }
@@ -32,42 +93,172 @@ const selected = (featured.length > 0 ? featured : await getPublishedProjects())
   #selected-work {
     min-width: 0;
   }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--color-border-strong);
+  }
+
   h2 {
     font-size: var(--font-size-body-lg);
     line-height: var(--line-snug);
   }
 
-  .project-list {
-    display: grid;
-    gap: var(--space-5);
-    margin: var(--space-5) 0 0;
+  .section-header a {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-nav);
+    font-weight: var(--font-weight-medium);
+    text-decoration: none;
+  }
+
+  .section-header a:hover,
+  .section-header a:focus-visible {
+    color: var(--color-text);
+    text-decoration: underline;
+  }
+
+  .project-grid {
+    columns: 3;
+    column-gap: var(--space-2);
+    margin: 0;
     padding: 0;
     list-style: none;
   }
 
-  .project-list a {
-    font-family: var(--font-display);
+  .project-grid li {
+    display: inline-block;
+    width: 100%;
+    min-width: 0;
+    margin: 0 0 var(--space-2);
+    overflow: hidden;
+    border-radius: var(--radius-ui-sm);
+    background: var(--color-surface);
+    break-inside: avoid;
+  }
+
+  .project-card {
     display: flex;
-    align-items: center;
-    min-height: var(--control-height);
-    padding: var(--space-2) 0;
+    flex-direction: column;
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .project-image {
+    position: relative;
+    display: block;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background: var(--color-border);
+  }
+
+  .project-grid li:nth-child(2) .project-image {
+    aspect-ratio: 1;
+  }
+
+  .project-grid li:nth-child(3) .project-image {
+    aspect-ratio: 3 / 4;
+  }
+
+  .project-grid li:nth-child(4) .project-image {
+    aspect-ratio: 4 / 3;
+  }
+
+  .project-grid li:nth-child(5) .project-image {
+    aspect-ratio: 2 / 3;
+  }
+
+  .project-image :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--duration-slow) var(--ease-out);
+  }
+
+  .project-details {
+    display: grid;
+    gap: var(--space-1);
+    padding: var(--space-2) var(--space-3) var(--space-3);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .project-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-3);
+  }
+
+  .project-title {
+    font-family: var(--font-display);
     font-size: var(--font-size-body);
     font-weight: var(--font-weight-medium);
     letter-spacing: var(--tracking-heading);
     line-height: var(--line-snug);
-    text-decoration: none;
-    width: fit-content;
-    transition: color var(--duration-fast) var(--ease-out);
-  }
-  .project-list p {
-    margin: 0;
-    color: var(--color-text-muted);
-    font-size: var(--font-size-nav);
   }
 
-  .project-list a:hover,
-  .project-list a:focus-visible {
-    text-decoration: underline;
+  .project-arrow {
+    transition: transform var(--duration-fast) var(--ease-out);
+  }
+
+  .project-meta {
+    overflow: hidden;
     color: var(--color-text-muted);
+    font-size: var(--font-size-meta);
+    letter-spacing: var(--tracking-meta);
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .project-card:hover .project-image :global(img),
+  .project-card:focus-visible .project-image :global(img) {
+    transform: scale(1.025);
+  }
+
+  .project-card:hover .project-arrow,
+  .project-card:focus-visible .project-arrow {
+    transform: translate(0.15rem, -0.15rem);
+  }
+
+  .project-card:hover .project-details,
+  .project-card:focus-visible .project-details {
+    background: var(--color-surface-hover);
+  }
+
+  .project-details {
+    transition: background-color var(--duration-fast) var(--ease-out);
+  }
+
+  .project-card:focus-visible {
+    outline-offset: -3px;
+  }
+
+  @media (max-width: 64rem) {
+    .project-grid {
+      columns: 2;
+    }
+  }
+
+  @media (max-width: 40rem) {
+    .section-header {
+      align-items: flex-start;
+    }
+
+    .project-grid {
+      columns: 1;
+      padding: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .project-image :global(img),
+    .project-arrow {
+      transition: none;
+    }
   }
 </style>

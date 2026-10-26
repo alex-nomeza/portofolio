@@ -8,13 +8,15 @@ import NextProject from '../components/project/NextProject.astro';
 import ZahirSlideshow from '../components/project/ZahirSlideshow.astro';
 import type { Project } from '../utils/projects';
 import SiteDemos from '../components/project/SiteDemos.astro';
+import { Badge } from '../components/ui/badge';
 
 interface Props {
   project: Project;
+  previous?: Project;
   next?: Project;
 }
 
-const { project, next } = Astro.props;
+const { project, previous, next } = Astro.props;
 const { data } = project;
 
 const title = (data.seo?.title ?? data.title).replace(/ — Alex Rafanomezantsoa$/, '');
@@ -42,15 +44,14 @@ const links = [
 
 <BaseLayout title={`${title} — Alex Rafanomezantsoa`} description={description}>
   <article class="project container">
-    <LinkButton direction="left" href={withBase('work/')}>Tous les projets</LinkButton>
+    <LinkButton direction="left" href={withBase('#projets')} variant="outline">
+      Retour aux réalisations
+    </LinkButton>
     <div
-      class:list={[
-        'project-opening editorial-grid',
-        { 'project-opening-showcase': project.id === 'le-zahir' },
-      ]}
+      class:list={['project-opening', { 'project-opening-showcase': project.id === 'le-zahir' }]}
     >
       <header class="project-header">
-        <p class="eyebrow">Projet · {data.year}</p>
+        <Badge variant="secondary">{data.year ? `Projet · ${data.year}` : 'Projet'}</Badge>
         <h1 class="project-title">{data.title}</h1>
         {data.subtitle && <p class="project-subtitle">{data.subtitle}</p>}
 
@@ -68,8 +69,9 @@ const links = [
         {
           links.length > 0 && (
             <p class="project-links">
-              {links.map((link) => (
+              {links.map((link, index) => (
                 <LinkButton
+                  variant={index === 0 ? 'default' : 'outline'}
                   direction="external"
                   href={link.href}
                   rel="noopener noreferrer"
@@ -104,61 +106,54 @@ const links = [
 
     {data.gallery && <ProjectGallery items={data.gallery} />}
 
-    {next && <NextProject project={next} />}
+    {(previous || next) && <NextProject previous={previous} next={next} />}
     <footer class="project-footer page-actions">
-      <LinkButton href={withBase('work/')} direction="left">Tous les projets</LinkButton>
-      <LinkButton href={withBase('contact/')}>Discuter d’un projet</LinkButton>
+      <LinkButton href={withBase('#projets')} direction="left">Retour aux réalisations</LinkButton>
+      <LinkButton href={withBase()}>Accueil</LinkButton>
     </footer>
   </article>
 </BaseLayout>
 
 <style>
   .project {
-    padding-block: var(--space-5) var(--section-space);
+    padding-block: var(--space-7) var(--section-space);
   }
   .project-opening {
+    display: grid;
+    gap: var(--space-7);
     margin-top: var(--space-6);
-    align-items: start;
   }
   .project-header {
     display: grid;
     gap: var(--space-5);
   }
-  .project-opening-showcase {
-    display: block;
-  }
-  @media (min-width: 56rem) {
-    .project-opening-showcase .project-header {
-      grid-template-columns: var(--editorial-left) var(--editorial-right);
-      column-gap: var(--editorial-gap);
-    }
-    .project-opening-showcase .project-header > :not(.project-meta) {
-      grid-column: 1;
-    }
-    .project-opening-showcase .project-meta {
-      grid-column: 2;
-      grid-row: 1 / 4;
-      margin: 0;
-      padding: 0;
-      border: 0;
-    }
-  }
   .project-title {
-    font-size: var(--font-size-hero);
-    line-height: var(--line-snug);
-    max-width: 16ch;
+    max-width: 13ch;
+    font-size: var(--font-size-h1);
+    line-height: var(--line-tight);
   }
   .project-subtitle {
-    max-width: 38ch;
+    max-width: 58ch;
     color: var(--color-text-muted);
     margin: 0;
     font-size: var(--font-size-body-lg);
   }
   .project-meta {
     display: grid;
-    gap: var(--space-5);
-    margin: var(--space-5) 0 0;
-    padding-top: var(--space-5);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    overflow: hidden;
+    margin: 0;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-ui-lg);
+    background: var(--color-surface);
+  }
+  .project-meta > div {
+    padding: var(--space-4);
+  }
+  .project-meta > div:nth-child(even) {
+    border-left: 1px solid var(--color-border);
+  }
+  .project-meta > div:nth-child(n + 3) {
     border-top: 1px solid var(--color-border);
   }
   .project-meta dt {
@@ -178,21 +173,28 @@ const links = [
     display: block;
     width: 100%;
     height: auto;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-ui-lg);
   }
   .project-body {
     margin-top: var(--section-space);
+    padding-top: 0;
   }
   .project-footer {
     margin-top: var(--space-7);
     padding-top: var(--space-5);
-    border-top: 1px solid var(--color-border);
     justify-content: space-between;
+    border-top: 1px solid var(--color-border);
   }
-  @media (min-width: 56rem) {
-    .project-body {
-      margin-left: auto;
-      max-width: none;
-      width: calc((100% - var(--editorial-gap)) * 0.55);
+  @media (max-width: 55.999rem) {
+    .project-meta {
+      grid-template-columns: 1fr;
+    }
+    .project-meta > div:nth-child(even) {
+      border-left: 0;
+    }
+    .project-meta > div + div {
+      border-top: 1px solid var(--color-border);
     }
   }
 </style>

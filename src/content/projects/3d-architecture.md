@@ -1,7 +1,7 @@
 ---
 title: '3D / Architecture'
-subtitle: 'Études spatiales autour des volumes, des matières, du dessin et de la lumière.'
-summary: 'Des études de volumes, de circulation et de lumière à travers le dessin 2D et la visualisation 3D.'
+subtitle: 'Des études en 2D et en 3D pour comprendre les volumes, les déplacements et la lumière.'
+summary: 'Des dessins et des vues 3D pour étudier les proportions, les passages, les matières et la lumière d’un espace.'
 year: 2026
 order: 50
 status: 'published'
@@ -17,13 +17,13 @@ cover: '../../assets/images/projects/3d-architecture-generated.png'
 coverAlt: 'Maquette architecturale blanche et structure filaire projetant de longues ombres sur des dessins techniques.'
 seo:
   title: '3D et architecture'
-  description: 'Des études de volumes, de circulation et de lumière à travers le dessin 2D et la visualisation 3D. Par Alex Rafanomezantsoa.'
+  description: 'Des dessins et des vues 3D pour étudier les proportions, les passages, les matières et la lumière. Par Alex Rafanomezantsoa.'
 ---
 
-## Lire et représenter l’espace
+## Le projet
 
-Cette sélection explore l’architecture comme conception spatiale et communication visuelle. Dessins, maquettes de volumes et rendus permettent d’étudier les proportions, les circulations, les matières et le comportement de la lumière.
+Cette sélection rassemble des dessins, des maquettes de volumes et des images 3D. Ces supports servent à vérifier les proportions, les passages, les matières et l’effet de la lumière dans un espace.
 
-## Du volume aux matières
+## Les étapes de travail
 
-Le travail commence par des volumes simples et des rapports clairs entre pleins et vides. Les premières études restent volontairement épurées pour évaluer l’échelle, les accès et les séquences spatiales avant d’introduire les détails de surface.
+Le travail commence avec des formes simples. Cette première étape permet de vérifier l’échelle, les accès et la relation entre les espaces. Les matières, les couleurs et les détails sont ajoutés seulement après la validation de cette structure.

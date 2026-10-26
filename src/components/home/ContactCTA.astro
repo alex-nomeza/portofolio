@@ -1,12 +1,54 @@
 ---
 import { profile } from '../../data/profile';
 import { LinkButton } from '../ui/link-button';
+
+interface Props {
+  prominent?: boolean;
+}
+
+const { prominent = false } = Astro.props;
 ---
 
-<section id="contact" class="contact-cta" aria-labelledby="contact-heading">
-  <h2 id="contact-heading">Un projet, une collaboration ?</h2>
-  <a class="email" href={`mailto:${profile.email}`}>{profile.email}</a>
-  <LinkButton href={profile.githubUrl} direction="external">GitHub</LinkButton>
+<section
+  id="contact"
+  class:list={['contact-cta', { 'contact-cta--prominent': prominent }]}
+  aria-labelledby="contact-heading"
+>
+  {
+    prominent ? (
+      <>
+        <div class="contact-copy">
+          <p class="eyebrow">Travaillons ensemble</p>
+          <h2 id="contact-heading">Vous avez un projet graphique ou web&nbsp;?</h2>
+          <p class="introduction">
+            Expliquez-moi votre besoin, le public concerné et le résultat que vous souhaitez.
+          </p>
+        </div>
+        <div class="contact-actions">
+          <a class="primary-action" href={`mailto:${profile.email}`}>
+            <span>
+              <small>M’envoyer un e-mail</small>
+              {profile.email}
+            </span>
+            <span aria-hidden="true">↗</span>
+          </a>
+          <a class="secondary-action" href={profile.githubUrl}>
+            Voir GitHub <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </>
+    ) : (
+      <>
+        <h2 id="contact-heading">Parlons de votre projet</h2>
+        <a class="email" href={`mailto:${profile.email}`}>
+          {profile.email}
+        </a>
+        <LinkButton href={profile.githubUrl} direction="external">
+          GitHub
+        </LinkButton>
+      </>
+    )
+  }
 </section>
 <style>
   .contact-cta {
@@ -27,5 +69,129 @@ import { LinkButton } from '../ui/link-button';
     font-size: var(--font-size-body-lg);
     line-height: var(--line-body);
     text-decoration-thickness: 1px;
+  }
+
+  .contact-cta--prominent {
+    grid-template-columns: minmax(0, 1.35fr) minmax(16rem, 0.65fr);
+    align-items: end;
+    gap: var(--editorial-gap);
+    padding: clamp(var(--space-6), 5vw, var(--space-8));
+    border-radius: var(--radius-ui-lg);
+    background: var(--color-inverse-bg);
+    color: var(--color-inverse-text);
+  }
+
+  .contact-copy {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .contact-cta--prominent .eyebrow {
+    margin: 0;
+    color: var(--color-border);
+    font-family: var(--font-meta);
+    font-size: var(--font-size-meta);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: var(--tracking-meta);
+    text-transform: uppercase;
+  }
+
+  .contact-cta--prominent h2 {
+    max-width: 17ch;
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 3.6vw, 3.5rem);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-tight);
+    line-height: var(--line-tight);
+    text-wrap: balance;
+  }
+
+  .introduction {
+    max-width: 48ch;
+    margin: 0;
+    color: var(--color-border);
+    font-size: var(--font-size-nav);
+  }
+
+  .contact-actions {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .primary-action,
+  .secondary-action {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    min-height: var(--control-height);
+    text-decoration: none;
+    transition:
+      background-color var(--duration-fast) var(--ease-out),
+      color var(--duration-fast) var(--ease-out);
+  }
+
+  .primary-action {
+    padding: var(--space-4);
+    background: var(--color-inverse-text);
+    color: var(--color-inverse-bg);
+    font-size: var(--font-size-nav);
+    font-weight: var(--font-weight-medium);
+    border-radius: var(--radius-ui-sm);
+  }
+
+  .primary-action span:first-child {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .primary-action small {
+    display: block;
+    margin-bottom: var(--space-1);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-meta);
+    font-weight: var(--font-weight-regular);
+    letter-spacing: var(--tracking-meta);
+    text-transform: uppercase;
+  }
+
+  .secondary-action {
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid currentColor;
+    color: var(--color-inverse-text);
+    font-size: var(--font-size-nav);
+    font-weight: var(--font-weight-medium);
+    border-radius: var(--radius-ui-sm);
+  }
+
+  .primary-action:hover,
+  .primary-action:focus-visible {
+    background: var(--color-border);
+  }
+
+  .secondary-action:hover,
+  .secondary-action:focus-visible {
+    background: var(--color-inverse-text);
+    color: var(--color-inverse-bg);
+  }
+
+  @media (max-width: 50rem) {
+    .contact-cta--prominent {
+      grid-template-columns: 1fr;
+      align-items: start;
+    }
+  }
+
+  @media (max-width: 30rem) {
+    .contact-cta--prominent {
+      padding: var(--space-5);
+    }
+
+    .primary-action {
+      align-items: flex-start;
+      gap: var(--space-2);
+      padding: var(--space-3);
+      font-size: var(--font-size-meta);
+    }
   }
 </style>

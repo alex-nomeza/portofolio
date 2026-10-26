@@ -4,16 +4,15 @@ import { cn } from '@/lib/utils';
 import { Slot } from '@radix-ui/react-slot';
 
 const buttonVariants = cva(
-  "inline-flex w-fit max-w-full items-center justify-center gap-2 rounded-none border border-solid border-transparent text-[length:var(--font-size-nav)] font-medium leading-normal no-underline whitespace-normal cursor-pointer transition-colors duration-[var(--duration-fast)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  "group inline-flex w-fit max-w-full items-center justify-center gap-2 rounded-md border border-solid border-transparent text-[length:var(--font-size-control)] font-medium leading-normal no-underline whitespace-normal cursor-pointer transition-[color,background-color,border-color,box-shadow,transform] duration-[var(--duration-fast)] outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   {
     variants: {
       variant: {
         default: 'bg-primary text-primary-foreground hover:bg-primary/90',
-        outline:
-          'border-primary bg-background text-foreground hover:bg-primary hover:text-primary-foreground',
+        outline: 'border-border bg-background text-foreground shadow-xs hover:bg-accent',
         secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
         ghost: 'bg-transparent text-foreground hover:bg-accent hover:text-accent-foreground',
-        link: 'bg-transparent text-primary underline-offset-4 hover:underline',
+        link: 'rounded-none bg-transparent text-primary underline-offset-4 hover:underline',
       },
       size: {
         default: 'min-h-[var(--control-height)] px-[var(--control-padding-inline)] py-2',

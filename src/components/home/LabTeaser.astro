@@ -15,13 +15,13 @@ const selected = (featured.length > 0 ? featured : entries).slice(0, 4);
 ---
 
 <section aria-labelledby="lab-teaser-title">
-  <h2 id="lab-teaser-title">Ce que j’explore</h2>
+  <h2 id="lab-teaser-title">Mes recherches en cours</h2>
 
   {
     selected.length === 0 ? (
       <CollectionEmpty
         title="Laboratoire à venir"
-        description="Les expérimentations, prototypes et explorations libres seront présentés ici."
+        description="Mes prochains essais et prototypes seront présentés ici."
       />
     ) : (
       <ul class="lab-teaser">
@@ -39,7 +39,7 @@ const selected = (featured.length > 0 ? featured : entries).slice(0, 4);
       </ul>
     )
   }
-  <LinkButton href={withBase('lab/')}>Tout le laboratoire</LinkButton>
+  <LinkButton href={withBase('lab/')}>Voir toutes les recherches</LinkButton>
 </section>
 
 <style>

@@ -1,6 +1,6 @@
 ---
-title: 'Système du portfolio'
-summary: 'La construction de ce site : collections Astro, typographie fluide et composants partagés, avec peu de JavaScript côté client.'
+title: 'Construction de ce portfolio'
+summary: 'Les choix techniques de ce site : Astro, contenus structurés, composants réutilisables et très peu de JavaScript.'
 year: 2026
 status: 'active'
 draft: false
@@ -12,18 +12,18 @@ tags:
 featured: true
 ---
 
-## Un site éditorial statique
+## L’objectif
 
-Le système du portfolio constitue la base graphique et technique de ce site. Il traduit une direction visuelle éditoriale en un site Astro statique, avec des projets structurés et très peu de JavaScript côté client.
+Ce portfolio doit présenter les projets clairement, se charger rapidement et rester facile à mettre à jour. Il est construit avec Astro et utilise très peu de JavaScript dans le navigateur.
 
-## Architecture
+## Organisation du contenu
 
-Les projets et les entrées du laboratoire sont conservés dans des collections de contenu typées. Les mises en page partagées gèrent les métadonnées, la navigation et la structure des études de cas. Des composants Astro ciblés assurent la présentation des sections récurrentes.
+Les projets et les recherches sont enregistrés dans des collections de contenu vérifiées par TypeScript. Des mises en page communes gèrent les titres, les informations principales et la navigation. Les sections répétées utilisent les mêmes composants Astro.
 
-## Système graphique
+## Mise en page
 
-L’interface repose sur un ensemble limité de variables de couleur, de typographie, d’espacement et de mouvement. La typographie fluide et les grilles adaptatives ajustent la composition aux différents écrans.
+Les couleurs, les tailles de texte, les espacements et les animations sont définis à un seul endroit. La taille des textes et les grilles s’ajustent automatiquement aux écrans de téléphone, de tablette et d’ordinateur.
 
-## Priorités techniques
+## Qualité technique
 
-La génération statique, le HTML sémantique, le traitement adaptatif des images et le nombre limité de dépendances favorisent la rapidité et la portabilité. L’accès au clavier, le focus visible, la réduction des animations et la validation du contenu font partie du système.
+Les pages sont générées à l’avance et les images sont adaptées à la taille de l’écran. Le site utilise du HTML sémantique et peu de dépendances. Il peut être utilisé au clavier, affiche clairement le focus et réduit les animations lorsque l’utilisateur le demande.

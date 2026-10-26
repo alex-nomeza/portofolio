@@ -3,73 +3,92 @@ import { withBase } from '../../utils/paths';
 import type { Project } from '../../utils/projects';
 
 interface Props {
-  project: Project;
+  previous?: Project;
+  next?: Project;
 }
 
-const { project } = Astro.props;
+const { previous, next } = Astro.props;
 ---
 
-<nav class="next-project" aria-label="Projet suivant">
-  <a href={withBase(`work/${project.id}/`)}>
-    <span class="next-label">Projet suivant</span>
-    <span class="next-title">{project.data.title}</span>
-    <span class="next-meta">
-      {project.data.disciplines.join(', ')} · {project.data.year}
-    </span>
-  </a>
+<nav class="project-navigation" aria-label="Navigation entre les projets">
+  {
+    previous && (
+      <a class="project-link previous" href={withBase(`projets/${previous.id}/`)}>
+        <span class="project-label">← Projet précédent</span>
+        <span class="project-title">{previous.data.title}</span>
+        <span class="project-meta">
+          {previous.data.disciplines[0]}
+          {previous.data.year && ` · ${previous.data.year}`}
+        </span>
+      </a>
+    )
+  }
+  {
+    next && (
+      <a class="project-link next" href={withBase(`projets/${next.id}/`)}>
+        <span class="project-label">Projet suivant →</span>
+        <span class="project-title">{next.data.title}</span>
+        <span class="project-meta">
+          {next.data.disciplines[0]}
+          {next.data.year && ` · ${next.data.year}`}
+        </span>
+      </a>
+    )
+  }
 </nav>
 
 <style>
-  .next-project {
+  .project-navigation {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-3);
     margin-top: var(--section-space);
-    border-top: 1px solid var(--color-border);
   }
 
-  .next-project a {
+  .project-link {
     display: grid;
-    gap: var(--space-3);
-    padding-top: var(--space-6);
+    gap: var(--space-2);
+    min-width: 0;
+    padding: var(--space-4);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-ui-lg);
+    background: var(--color-surface);
     text-decoration: none;
   }
 
-  @media (min-width: 56rem) {
-    .next-project a {
-      grid-template-columns: var(--editorial-left) var(--editorial-right);
-      column-gap: var(--editorial-gap);
-      align-items: baseline;
-    }
-    .next-meta {
-      grid-column: 2;
-    }
-  }
-  .next-label {
-    color: var(--color-text-muted);
-    font-family: var(--font-meta);
-    font-size: var(--font-size-meta);
-    letter-spacing: var(--tracking-meta);
-    text-transform: uppercase;
+  .project-link:is(:hover, :focus-visible) {
+    background: var(--color-surface-hover);
+    border-color: var(--color-border-strong);
   }
 
-  .next-title {
+  .next {
+    text-align: right;
+  }
+
+  .project-label {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-meta);
+  }
+
+  .project-title {
     font-family: var(--font-display);
     font-size: var(--font-size-body-lg);
     font-weight: var(--font-weight-medium);
-    letter-spacing: var(--tracking-tight);
-    line-height: var(--line-snug);
   }
 
-  .next-project a:is(:hover, :focus-visible) .next-title {
+  .project-link:is(:hover, :focus-visible) .project-title {
     text-decoration: underline;
-    text-underline-offset: 0.12em;
+    text-underline-offset: 0.2em;
   }
 
-  .next-title::after {
-    content: ' \2192'; /* → */
-  }
-
-  .next-meta {
+  .project-meta {
     color: var(--color-text-muted);
-    font-family: var(--font-meta);
     font-size: var(--font-size-meta);
+  }
+
+  @media (max-width: 40rem) {
+    .project-navigation {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

@@ -9,7 +9,7 @@ const projects = defineCollection({
       title: z.string().min(1),
       subtitle: z.string().min(1).optional(),
       summary: z.string().min(1),
-      year: z.number().int(),
+      year: z.number().int().optional(),
       order: z.number().int().nonnegative(),
       status: z.enum(['published', 'draft']),
       featured: z.boolean(),
